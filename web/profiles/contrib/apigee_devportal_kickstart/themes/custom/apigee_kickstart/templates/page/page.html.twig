@@ -1,0 +1,122 @@
+{#
+/**
+ * @file
+ * Template for the main page.
+ */
+#}
+{% set classes = [
+  'page'
+]|merge(classes|default([])) %}
+
+{% set main_attributes = create_attribute() %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% embed '@apigee-kickstart/navbar/navbar.twig' with {
+    placement: 'sticky-top',
+    container: 'fixed',
+    color: false
+  } %}
+
+    {% block branding %}
+      {% if page.navbar_branding %}
+        {{ page.navbar_branding }}
+      {% endif %}
+    {% endblock %}
+
+    {% block left %}
+      {% if page.navbar_left %}
+        <div class="mr-auto">
+          {{ page.navbar_left }}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    {% block right %}
+      {% if page.navbar_right %}
+        {{ page.navbar_right }}
+      {% endif %}
+    {% endblock %}
+  {% endembed %}
+
+  {% if page.breadcrumbs|render %}
+    <nav aria-label="breadcrumb" class="page__breadcrumbs">
+      <div class="container">
+        <ol class="breadcrumb">
+          {{ page.breadcrumbs }}
+        </ol>
+      </div>
+    </nav>
+  {% endif %}
+
+  {% if page.header|render %}
+    <header class="page__header">
+      {# If field_header has a value, it should replace the title block.#}
+      {% if node.field_header.value %}
+        {{ page.header|without('apigee_kickstart_title') }}
+      {% else %}
+        {{ page.header }}
+      {% endif %}
+    </header>
+  {% endif %}
+
+  <main{{ main_attributes.addClass(main_classes|default([])) }}>
+    {# If field_header has a value, the tabs will print in the node template.#}
+    {% if page.tasks|render and not node.field_header.value %}
+      <div class="page__tasks">
+        <div class="container">
+          {{ page.tasks }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if page.content_above %}
+      <div class="page__content_above">
+        <div class="container-fluid px-0">
+          {{ page.content_above }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% block content %}
+      {% if page.content %}
+        <div class="page__content">
+          <div class="container py-5">
+            {{ page.content }}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+  </main>
+
+  {% if page.content_below %}
+    <div class="page__content_below">
+      <div class="container-fluid px-0">
+        {{ page.content_below }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if page.footer or page.copyright %}
+    <footer class="page__footer">
+      {% if page.footer %}
+        <div class="footer pt-5 pb-4 pb-md-8">
+          <div class="container">
+            <div class="d-md-flex justify-content-md-between">
+              {{ page.footer }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if page.copyright %}
+        <div class="copyright py-1">
+          <div class="container">
+            <div class="d-md-flex justify-content-md-end">
+              {{ page.copyright }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </footer>
+  {% endif %}
+</div>
