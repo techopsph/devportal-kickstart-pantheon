@@ -41,4 +41,4 @@ We'd love to accept your patches and contributions to this project. Make sure to
 
 ## Disclaimer
 
-This is not an officially supported Google product.
+This is not an officially supported Google product. YAY!
