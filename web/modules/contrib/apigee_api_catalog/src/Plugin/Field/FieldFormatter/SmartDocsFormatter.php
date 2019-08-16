@@ -101,7 +101,7 @@ class SmartDocsFormatter extends FileFormatterBase implements ContainerFactoryPl
     $xuacompatible = [
       '#tag' => 'base',
       '#attributes' => [
-        'href' => '/',
+        'href' => base_path(),
       ],
     ];
     $elements['#attached']['html_head'][] = [$xuacompatible, 'base-href'];
@@ -123,7 +123,8 @@ class SmartDocsFormatter extends FileFormatterBase implements ContainerFactoryPl
     /** @var \Drupal\file\Entity\File $file */
     foreach ($this->getEntitiesToView($items, $langcode) as $delta => $file) {
       $openapi_files[] = [
-        'fileUrl' => $file->url(),
+        // Get the URL of the file on server.
+        'fileUrl' => $file->createFileUrl(FALSE),
         'fileExtension' => pathinfo($file->getFilename(), PATHINFO_EXTENSION),
       ];
     }

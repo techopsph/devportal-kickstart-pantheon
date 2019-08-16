@@ -16,9 +16,13 @@
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.6.5",
     "drupal-composer/drupal-scaffold": "^2.5",
-    "apigee/apigee_devportal_kickstart": "^1.0.0",
+    "apigee/apigee_devportal_kickstart": "^1.4",
+    "drupal/apigee_m10n": "^1.0.0",
+    "drupal/commerce": "^2.13",
     "php": "^7.1",
-    "drush/drush": "~8"
+    "drush/drush": "~8",
+    "drupal/pantheon_advanced_page_cache": "^1.0",
+    "drupal/redis": "^1.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

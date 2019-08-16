@@ -191,28 +191,31 @@ class FileLinkItem extends LinkItem implements FileLinkInterface {
         $this->setException($request_exception);
       }
 
-      $this->values['format'] = NULL;
-      $this->values['size'] = 0;
+      $format = NULL;
+      $size = 0;
 
       if (!$this->getException() && ($response = $this->getResponse()) && ($this->isSupportedResponse($response))) {
         if ($response->hasHeader('Content-Type')) {
           // The format may have the pattern 'text/html; charset=UTF-8'. In this
           // case, keep only the first relevant part.
-          $this->values['format'] = explode(';', $response->getHeaderLine('Content-Type'))[0];
+          $format = explode(';', $response->getHeaderLine('Content-Type'))[0];
         }
         else {
-          $this->values['format'] = NULL;
+          $format = NULL;
         }
         if ($response->hasHeader('Content-Length')) {
-          $this->values['size'] = (int) $response->getHeaderLine('Content-Length');
+          $size = (int) $response->getHeaderLine('Content-Length');
         }
         else {
           // The server didn't sent the Content-Length header. In this case,
           // perform a full GET and measure the size of the returned body.
           $response = $this->getHttpClient()->get($url, $options);
-          $this->values['size'] = (int) $response->getBody()->getSize();
+          $size = (int) $response->getBody()->getSize();
           $this->setResponse($response);
         }
+
+        $this->writePropertyValue('size', $size);
+        $this->writePropertyValue('format', $format);
       }
     }
   }

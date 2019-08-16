@@ -4,11 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
+class ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
@@ -95,6 +94,7 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
+            'PantheonSystems\\CDNBehatHelpers\\' => 32,
         ),
         'M' => 
         array (
@@ -132,10 +132,12 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
         'D' => 
         array (
             'Drush\\' => 6,
+            'Drupal\\redis\\' => 13,
             'Drupal\\Driver\\' => 14,
             'Drupal\\Core\\' => 12,
             'Drupal\\Component\\' => 17,
             'DrupalComposer\\DrupalScaffold\\' => 30,
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
@@ -148,6 +150,8 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
             'Consolidation\\AnnotatedCommand\\' => 31,
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'CommerceGuys\\Intl\\' => 18,
+            'CommerceGuys\\Addressing\\' => 24,
             'Clue\\StreamFilter\\' => 18,
         ),
         'B' => 
@@ -328,6 +332,10 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PantheonSystems\\CDNBehatHelpers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/pantheon_advanced_page_cache/tests/behat/helper_classes',
+        ),
         'Moment\\' => 
         array (
             0 => __DIR__ . '/..' . '/fightbulc/moment/src',
@@ -393,6 +401,10 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
         array (
             0 => __DIR__ . '/..' . '/drush/drush/src',
         ),
+        'Drupal\\redis\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/redis/src',
+        ),
         'Drupal\\Driver\\' => 
         array (
             0 => __DIR__ . '/../..' . '/web/drivers/lib/Drupal/Driver',
@@ -408,6 +420,10 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
         'DrupalComposer\\DrupalScaffold\\' => 
         array (
             0 => __DIR__ . '/..' . '/drupal-composer/drupal-scaffold/src',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
         ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
@@ -447,6 +463,14 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'CommerceGuys\\Intl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/intl/src',
+        ),
+        'CommerceGuys\\Addressing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
         ),
         'Clue\\StreamFilter\\' => 
         array (
@@ -501,10 +525,6 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
             array (
                 0 => __DIR__ . '/..' . '/drush/drush/lib',
             ),
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
             'Dflydev\\DotAccessData' => 
             array (
                 0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
@@ -556,11 +576,11 @@ class ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInit3b9577aadff0d20f45939a6d90a2d77b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a::$classMap;
 
         }, null, ClassLoader::class);
     }
