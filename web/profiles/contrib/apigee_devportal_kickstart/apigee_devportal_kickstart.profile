@@ -23,6 +23,10 @@
  * Enables modules and site configuration for apigee_devportal_kickstart.
  */
 
+use Drupal\apigee_devportal_kickstart\Installer\ApigeeDevportalKickstartTasksManager;
+use Drupal\apigee_devportal_kickstart\Installer\Form\ApigeeMonetizationConfigurationForm;
+use Drupal\apigee_devportal_kickstart\Installer\Form\ApigeeEdgeConfigurationForm;
+use Drupal\apigee_devportal_kickstart\Installer\Form\DemoInstallForm;
 use Drupal\contact\Entity\ContactForm;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -40,5 +44,8 @@ function apigee_devportal_kickstart_form_install_configure_form_alter(&$form, Fo
  */
 function apigee_devportal_kickstart_form_install_configure_submit($form, FormStateInterface $form_state) {
   $site_mail = $form_state->getValue('site_mail');
-  ContactForm::load('feedback')->setRecipients([$site_mail])->trustData()->save();
+  ContactForm::load('feedback')
+    ->setRecipients([$site_mail])
+    ->trustData()
+    ->save();
 }

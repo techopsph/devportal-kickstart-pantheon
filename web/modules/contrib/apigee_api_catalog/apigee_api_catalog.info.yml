@@ -10,8 +10,8 @@ dependencies:
 - drupal:file_link
 - apigee_edge:apigee_edge
 
-# Information added by Drupal.org packaging script on 2019-05-29
-version: '8.x-1.0-beta2'
+# Information added by Drupal.org packaging script on 2019-06-26
+version: '8.x-1.0-rc2'
 core: '8.x'
 project: 'apigee_api_catalog'
-datestamp: 1559098389
+datestamp: 1561556892
