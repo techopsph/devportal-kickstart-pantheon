@@ -63,6 +63,7 @@ return array(
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/EmailValidator'),
+    'Drush\\Commands\\radix\\' => array($baseDir . '/web/themes/contrib/radix/Commands/radix'),
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
     'Drupal\\redis\\' => array($baseDir . '/web/modules/contrib/redis/src'),
     'Drupal\\Driver\\' => array($baseDir . '/web/drivers/lib/Drupal/Driver'),

@@ -1,7 +1,7 @@
 name: RADIX_SUBTHEME_NAME
 description: RADIX_SUBTHEME_DESCRIPTION
 screenshot: screenshot.png
-# core: 8.x
+core: 8.x
 # version: VERSION
 engine: twig
 type: theme
@@ -32,8 +32,7 @@ component-libraries:
     paths:
       - ./src/components
 
-# Information added by Drupal.org packaging script on 2019-07-23
-version: '8.x-4.4'
-core: '8.x'
+# Information added by Drupal.org packaging script on 2019-10-07
+version: '8.x-4.6'
 project: 'radix'
-datestamp: 1563909535
+datestamp: 1570446487
