@@ -131,6 +131,7 @@ class ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a
         ),
         'D' => 
         array (
+            'Drush\\Commands\\radix\\' => 21,
             'Drush\\' => 6,
             'Drupal\\redis\\' => 13,
             'Drupal\\Driver\\' => 14,
@@ -396,6 +397,10 @@ class ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+        ),
+        'Drush\\Commands\\radix\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/themes/contrib/radix/Commands/radix',
         ),
         'Drush\\' => 
         array (

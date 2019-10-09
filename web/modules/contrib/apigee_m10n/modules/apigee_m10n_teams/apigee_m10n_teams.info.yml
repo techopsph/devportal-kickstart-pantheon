@@ -3,7 +3,7 @@ description: Adds monetization support for Apigee Edge Teams.
 package: Apigee (Experimental)
 
 type: module
-# core: 8.x
+core: 8.x
 
 dependencies:
   - apigee_m10n:apigee_m10n
@@ -11,8 +11,7 @@ dependencies:
 
 php: "7.1"
 
-# Information added by Drupal.org packaging script on 2019-07-22
-version: '8.x-1.0'
-core: '8.x'
+# Information added by Drupal.org packaging script on 2019-09-11
+version: '8.x-1.1'
 project: 'apigee_m10n'
-datestamp: 1563836289
+datestamp: 1568236988
