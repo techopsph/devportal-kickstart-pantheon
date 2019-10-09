@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "904795250a8147f8659be494c255e255",
+    "content-hash": "e11948780fc587238f146caded11dfc4",
     "packages": [
         {
             "name": "apigee/apigee-client-php",
@@ -7707,7 +7707,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.3"
     },
     "platform-dev": []
 }
