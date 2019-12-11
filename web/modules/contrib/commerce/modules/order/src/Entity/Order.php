@@ -21,15 +21,16 @@ use Drupal\profile\Entity\ProfileInterface;
  *
  * @ContentEntityType(
  *   id = "commerce_order",
- *   label = @Translation("Order"),
- *   label_collection = @Translation("Orders"),
- *   label_singular = @Translation("order"),
- *   label_plural = @Translation("orders"),
+ *   label = @Translation("Order", context = "Commerce"),
+ *   label_collection = @Translation("Orders", context = "Commerce"),
+ *   label_singular = @Translation("order", context = "Commerce"),
+ *   label_plural = @Translation("orders", context = "Commerce"),
  *   label_count = @PluralTranslation(
  *     singular = "@count order",
  *     plural = "@count orders",
+ *     context = "Commerce",
  *   ),
- *   bundle_label = @Translation("Order type"),
+ *   bundle_label = @Translation("Order type", context = "Commerce"),
  *   handlers = {
  *     "event" = "Drupal\commerce_order\Event\OrderEvent",
  *     "storage" = "Drupal\commerce_order\OrderStorage",
@@ -74,7 +75,8 @@ use Drupal\profile\Entity\ProfileInterface;
  *     "resend-receipt-form" = "/admin/commerce/orders/{commerce_order}/resend-receipt"
  *   },
  *   bundle_entity_type = "commerce_order_type",
- *   field_ui_base_route = "entity.commerce_order_type.edit_form"
+ *   field_ui_base_route = "entity.commerce_order_type.edit_form",
+ *   allow_number_patterns = TRUE,
  * )
  */
 class Order extends CommerceContentEntityBase implements OrderInterface {

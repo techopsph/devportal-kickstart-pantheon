@@ -2,10 +2,14 @@
 
 namespace Drupal\Tests\commerce\Functional;
 
+use Drupal\commerce_price\Comparator\NumberComparator;
+use Drupal\commerce_price\Comparator\PriceComparator;
 use Drupal\commerce_store\StoreCreationTrait;
 use Drupal\Tests\block\Traits\BlockCreationTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\commerce\Traits\CommerceBrowserTestTrait;
+use Drupal\Tests\commerce\Traits\DeprecationSuppressionTrait;
+use SebastianBergmann\Comparator\Factory as PhpUnitComparatorFactory;
 
 /**
  * Provides a base class for Commerce functional tests.
@@ -15,6 +19,7 @@ abstract class CommerceBrowserTestBase extends BrowserTestBase {
   use BlockCreationTrait;
   use StoreCreationTrait;
   use CommerceBrowserTestTrait;
+  use DeprecationSuppressionTrait;
 
   /**
    * The store entity.
@@ -51,7 +56,12 @@ abstract class CommerceBrowserTestBase extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected function setUp() {
+    $this->setErrorHandler();
     parent::setUp();
+
+    $factory = PhpUnitComparatorFactory::getInstance();
+    $factory->register(new NumberComparator());
+    $factory->register(new PriceComparator());
 
     $this->store = $this->createStore();
     $this->placeBlock('local_tasks_block');
@@ -60,6 +70,14 @@ abstract class CommerceBrowserTestBase extends BrowserTestBase {
 
     $this->adminUser = $this->drupalCreateUser($this->getAdministratorPermissions());
     $this->drupalLogin($this->adminUser);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function tearDown() {
+    parent::tearDown();
+    $this->restoreErrorHandler();
   }
 
   /**

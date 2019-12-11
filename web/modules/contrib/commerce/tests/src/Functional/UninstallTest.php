@@ -3,6 +3,7 @@
 namespace Drupal\Tests\commerce\Functional;
 
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\commerce\Traits\DeprecationSuppressionTrait;
 
 /**
  * Tests module uninstallation.
@@ -11,10 +12,30 @@ use Drupal\Tests\BrowserTestBase;
  */
 class UninstallTest extends BrowserTestBase {
 
+  use DeprecationSuppressionTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    $this->setErrorHandler();
+    parent::setUp();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function tearDown() {
+    parent::tearDown();
+    $this->restoreErrorHandler();
+  }
+
   /**
    * {@inheritdoc}
    */
   public static $modules = [
+    // The list doesn't include commerce_tax, which cannot be uninstalled due
+    // to a core bug (#2871486).
     'commerce',
     'commerce_price',
     'commerce_log',
@@ -24,7 +45,6 @@ class UninstallTest extends BrowserTestBase {
     'commerce_cart',
     'commerce_checkout',
     'commerce_payment',
-    'commerce_tax',
   ];
 
   /**

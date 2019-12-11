@@ -60,7 +60,7 @@ class PaymentListBuilder extends EntityListBuilder {
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
       $entity_type,
-      $container->get('entity.manager')->getStorage($entity_type->id()),
+      $container->get('entity_type.manager')->getStorage($entity_type->id()),
       $container->get('commerce_price.currency_formatter'),
       $container->get('current_route_match')
     );
@@ -85,22 +85,26 @@ class PaymentListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   protected function getDefaultOperations(EntityInterface $entity) {
+    $operations = [];
     /** @var \Drupal\commerce_payment\Entity\PaymentInterface $entity */
-    $payment_gateway_plugin = $entity->getPaymentGateway()->getPlugin();
-    $operations = $payment_gateway_plugin->buildPaymentOperations($entity);
-    // Filter out operations that aren't allowed.
-    $operations = array_filter($operations, function ($operation) {
-      return !empty($operation['access']);
-    });
-    // Build the url for each operation.
-    $base_route_parameters = [
-      'commerce_payment' => $entity->id(),
-      'commerce_order' => $entity->getOrderId(),
-    ];
-    foreach ($operations as $operation_id => $operation) {
-      $route_parameters = $base_route_parameters + ['operation' => $operation_id];
-      $operation['url'] = new Url('entity.commerce_payment.operation_form', $route_parameters);
-      $operations[$operation_id] = $operation;
+    $payment_gateway = $entity->getPaymentGateway();
+    // Add the gateway-specific operations.
+    if ($payment_gateway) {
+      $operations = $payment_gateway->getPlugin()->buildPaymentOperations($entity);
+      // Filter out operations that aren't allowed.
+      $operations = array_filter($operations, function ($operation) {
+        return !empty($operation['access']);
+      });
+      // Build the url for each operation.
+      $base_route_parameters = [
+        'commerce_payment' => $entity->id(),
+        'commerce_order' => $entity->getOrderId(),
+      ];
+      foreach ($operations as $operation_id => $operation) {
+        $route_parameters = $base_route_parameters + ['operation' => $operation_id];
+        $operation['url'] = new Url('entity.commerce_payment.operation_form', $route_parameters);
+        $operations[$operation_id] = $operation;
+      }
     }
     // Add the non-gateway-specific operations.
     if ($entity->access('delete')) {
@@ -141,7 +145,7 @@ class PaymentListBuilder extends EntityListBuilder {
 
     $row['label'] = $formatted_amount;
     $row['state'] = $entity->getState()->getLabel();
-    $row['payment_gateway'] = $payment_gateway ? $payment_gateway->label() : '';
+    $row['payment_gateway'] = $payment_gateway ? $payment_gateway->label() : $this->t('N/A');
     $row['remote_id'] = $entity->getRemoteId() ?: $this->t('N/A');
 
     return $row + parent::buildRow($entity);

@@ -7,23 +7,23 @@ use Drupal\commerce_order\Entity\OrderItem;
 use Drupal\commerce_order\Entity\OrderItemType;
 use Drupal\commerce_price\Price;
 use Drupal\commerce_store\Entity\Store;
-use Drupal\commerce_tax\Plugin\Commerce\TaxType\CanadianSalesTax;
+use Drupal\commerce_tax\Entity\TaxType;
 use Drupal\commerce_tax\TaxableType;
-use Drupal\Tests\commerce\Kernel\CommerceKernelTestBase;
 use Drupal\profile\Entity\Profile;
+use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
 
 /**
  * @coversDefaultClass \Drupal\commerce_tax\Plugin\Commerce\TaxType\CanadianSalesTax
  * @group commerce
  */
-class CanadianSalesTaxTest extends CommerceKernelTestBase {
+class CanadianSalesTaxTest extends OrderKernelTestBase {
 
   /**
-   * The tax type plugin.
+   * The tax type.
    *
-   * @var \Drupal\commerce_tax\Plugin\Commerce\TaxType\TaxTypeInterface
+   * @var \Drupal\commerce_tax\Entity\TaxTypeInterface
    */
-  protected $plugin;
+  protected $taxType;
 
   /**
    * A sample user.
@@ -38,11 +38,6 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
    * @var array
    */
   public static $modules = [
-    'entity_reference_revisions',
-    'profile',
-    'state_machine',
-    'commerce_product',
-    'commerce_order',
     'commerce_tax',
   ];
 
@@ -52,10 +47,7 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
   protected function setUp() {
     parent::setUp();
 
-    $this->installEntitySchema('profile');
-    $this->installEntitySchema('commerce_order');
-    $this->installEntitySchema('commerce_order_item');
-    $this->installConfig('commerce_order');
+    $this->installConfig(['commerce_tax']);
 
     // Order item types that doesn't need a purchasable entity, for simplicity.
     OrderItemType::create([
@@ -70,11 +62,17 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
     $user = $this->createUser();
     $this->user = $this->reloadEntity($user);
 
-    $configuration = [
-      '_entity_id' => 'canadian_sales_tax',
-      'display_inclusive' => FALSE,
-    ];
-    $this->plugin = CanadianSalesTax::create($this->container, $configuration, 'canadian_sales_tax', ['label' => 'Canadian Sales Tax']);
+    $this->taxType = TaxType::create([
+      'id' => 'canadian_sales_tax',
+      'label' => 'Canadian Sales Tax',
+      'plugin' => 'canadian_sales_tax',
+      'configuration' => [
+        'display_inclusive' => FALSE,
+      ],
+      // Don't allow the tax type to apply automatically.
+      'status' => FALSE,
+    ]);
+    $this->taxType->save();
   }
 
   /**
@@ -82,10 +80,11 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
    * @covers ::apply
    */
   public function testApplication() {
+    $plugin = $this->taxType->getPlugin();
     // British Columbia customer, GST+PST.
     $order = $this->buildOrder('CA', 'BC');
-    $this->assertTrue($this->plugin->applies($order));
-    $this->plugin->apply($order);
+    $this->assertTrue($plugin->applies($order));
+    $plugin->apply($order);
     $adjustments = $order->collectAdjustments();
     $this->assertCount(2, $adjustments);
     $this->assertEquals('canadian_sales_tax|ca|gst', $adjustments[0]->getSourceId());
@@ -98,8 +97,8 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
 
     // Alberta customer, GST.
     $order = $this->buildOrder('CA', 'AB');
-    $this->assertTrue($this->plugin->applies($order));
-    $this->plugin->apply($order);
+    $this->assertTrue($plugin->applies($order));
+    $plugin->apply($order);
     $adjustments = $order->collectAdjustments();
     $adjustment = reset($adjustments);
     $this->assertCount(1, $adjustments);
@@ -107,8 +106,8 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
 
     // Ontario customer, HST.
     $order = $this->buildOrder('CA', 'ON');
-    $this->assertTrue($this->plugin->applies($order));
-    $this->plugin->apply($order);
+    $this->assertTrue($plugin->applies($order));
+    $plugin->apply($order);
     $adjustments = $order->collectAdjustments();
     $adjustment = reset($adjustments);
     $this->assertCount(1, $adjustments);
@@ -116,7 +115,7 @@ class CanadianSalesTaxTest extends CommerceKernelTestBase {
 
     // US customer.
     $order = $this->buildOrder('US', 'SC');
-    $this->plugin->apply($order);
+    $plugin->apply($order);
     $this->assertCount(0, $order->collectAdjustments());
   }
 
