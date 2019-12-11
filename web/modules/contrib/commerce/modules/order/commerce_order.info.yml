@@ -8,6 +8,7 @@ dependencies:
   - commerce:commerce
   - commerce:commerce_price
   - commerce:commerce_store
+  - commerce:commerce_number_pattern
   - entity_reference_revisions:entity_reference_revisions
   - profile:profile
   - state_machine:state_machine
@@ -29,7 +30,7 @@ config_devel:
     - profile.type.customer
     - system.action.commerce_delete_order_action
 
-# Information added by Drupal.org packaging script on 2019-08-30
-version: '8.x-2.14'
+# Information added by Drupal.org packaging script on 2019-11-06
+version: '8.x-2.15'
 project: 'commerce'
-datestamp: 1567123389
+datestamp: 1573065191

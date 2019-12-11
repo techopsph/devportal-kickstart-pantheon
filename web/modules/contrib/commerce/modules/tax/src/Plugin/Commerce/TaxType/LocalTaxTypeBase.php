@@ -225,8 +225,17 @@ abstract class LocalTaxTypeBase extends TaxTypeBase implements LocalTaxTypeInter
    *   The tax rates, keyed by tax zone ID.
    */
   protected function resolveRates(OrderItemInterface $order_item, ProfileInterface $customer_profile) {
-    $rates = [];
     $zones = $this->resolveZones($order_item, $customer_profile);
+    if (!$zones) {
+      return [];
+    }
+
+    // Provide the tax type entity to the resolvers.
+    $tax_type_storage = $this->entityTypeManager->getStorage('commerce_tax_type');
+    $tax_type = $tax_type_storage->load($this->entityId);
+    $this->chainRateResolver->setTaxType($tax_type);
+
+    $rates = [];
     foreach ($zones as $zone) {
       $rate = $this->chainRateResolver->resolve($zone, $order_item, $customer_profile);
       if (is_object($rate)) {
@@ -288,7 +297,7 @@ abstract class LocalTaxTypeBase extends TaxTypeBase implements LocalTaxTypeInter
     ];
     foreach ($zones as $zone) {
       if (count($zones) > 1) {
-        $element['table']['zone-' . $zone->getId()] = [
+        $element['table'][$zone->getId()] = [
           '#attributes' => [
             'class' => ['region-title'],
             'no_striping' => TRUE,
@@ -305,7 +314,7 @@ abstract class LocalTaxTypeBase extends TaxTypeBase implements LocalTaxTypeInter
           return $percentage->toString();
         }, $rate->getPercentages());
 
-        $element['table'][] = [
+        $element['table'][$zone->getId() . '|' . $rate->getId()] = [
           'rate' => [
             '#markup' => $rate->getLabel(),
           ],

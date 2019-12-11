@@ -130,12 +130,30 @@ class DefaultPaymentAdminTest extends CommerceBrowserTestBase {
   }
 
   /**
-   * Tests that a Payments tab is visible on the order page.
+   * Tests the Payments tab.
    */
   public function testPaymentTab() {
+    // Confirm that the tab is visible on the order page.
     $this->drupalGet($this->order->toUrl());
     $this->assertSession()->linkExists('Payments');
     $this->assertSession()->linkByHrefExists($this->paymentUri);
+
+    // Confirm that a payment is visible.
+    $this->createEntity('commerce_payment', [
+      'payment_gateway' => $this->paymentGateway->id(),
+      'payment_method' => $this->paymentMethod->id(),
+      'order_id' => $this->order->id(),
+      'amount' => new Price('10', 'USD'),
+    ]);
+    $this->drupalGet($this->paymentUri);
+    $this->assertSession()->pageTextContains('$10.00');
+    $this->assertSession()->pageTextContains($this->paymentGateway->label());
+
+    // Confirm that the payment is visible even if the gateway was deleted.
+    $this->paymentGateway->delete();
+    $this->drupalGet($this->paymentUri);
+    $this->assertSession()->pageTextContains('$10.00');
+    $this->assertSession()->pageTextNotContains($this->paymentGateway->label());
   }
 
   /**
@@ -156,8 +174,8 @@ class DefaultPaymentAdminTest extends CommerceBrowserTestBase {
     \Drupal::entityTypeManager()->getStorage('commerce_payment')->resetCache([1]);
     /** @var \Drupal\commerce_payment\Entity\PaymentInterface $payment */
     $payment = Payment::load(1);
-    $this->assertEquals($payment->getOrderId(), $this->order->id());
-    $this->assertEquals($payment->getAmount()->getNumber(), '100');
+    $this->assertEquals($this->order->id(), $payment->getOrderId());
+    $this->assertEquals('100.00', $payment->getAmount()->getNumber());
     $this->assertNotEmpty($payment->getCompletedTime());
   }
 

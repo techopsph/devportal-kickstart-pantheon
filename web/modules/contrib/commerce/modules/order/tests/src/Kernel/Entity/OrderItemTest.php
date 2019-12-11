@@ -4,9 +4,8 @@ namespace Drupal\Tests\commerce_order\Kernel\Entity;
 
 use Drupal\commerce_order\Adjustment;
 use Drupal\commerce_order\Entity\OrderItem;
-use Drupal\commerce_order\Entity\OrderItemType;
 use Drupal\commerce_price\Price;
-use Drupal\Tests\commerce\Kernel\CommerceKernelTestBase;
+use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
 
 /**
  * Tests the order item entity.
@@ -15,39 +14,7 @@ use Drupal\Tests\commerce\Kernel\CommerceKernelTestBase;
  *
  * @group commerce
  */
-class OrderItemTest extends CommerceKernelTestBase {
-
-  /**
-   * Modules to enable.
-   *
-   * @var array
-   */
-  public static $modules = [
-    'entity_reference_revisions',
-    'profile',
-    'state_machine',
-    'commerce_product',
-    'commerce_order',
-  ];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    $this->installEntitySchema('profile');
-    $this->installEntitySchema('commerce_order');
-    $this->installEntitySchema('commerce_order_item');
-    $this->installConfig('commerce_order');
-
-    // An order item type that doesn't need a purchasable entity, for simplicity.
-    OrderItemType::create([
-      'id' => 'test',
-      'label' => 'Test',
-      'orderType' => 'default',
-    ])->save();
-  }
+class OrderItemTest extends OrderKernelTestBase {
 
   /**
    * Tests the order item entity and its methods.
@@ -186,7 +153,8 @@ class OrderItemTest extends CommerceKernelTestBase {
    * @covers ::bundleFieldDefinitions
    */
   public function testInvalidBundle() {
-    $this->setExpectedException(\RuntimeException::class, 'Could not load the "invalid" order item type.');
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage('Could not load the "invalid" order item type.');
 
     $order_item = OrderItem::create([
       'type' => 'invalid',
