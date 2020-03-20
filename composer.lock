@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efab34e73fdee0338cef7da919f053d9",
+    "content-hash": "cce62f7db0249b5c18eeefb60b24f6ec",
     "packages": [
         {
             "name": "apigee/apigee-client-php",
@@ -91,16 +91,16 @@
         },
         {
             "name": "apigee/apigee_devportal_kickstart",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/apigee/apigee-devportal-kickstart-drupal.git",
-                "reference": "57e8d2f1446fec0cdc1400fce4b453e9790cca6c"
+                "reference": "77e3704ef0b070ffeae71bae2fa4c8e7431b45ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apigee/apigee-devportal-kickstart-drupal/zipball/57e8d2f1446fec0cdc1400fce4b453e9790cca6c",
-                "reference": "57e8d2f1446fec0cdc1400fce4b453e9790cca6c",
+                "url": "https://api.github.com/repos/apigee/apigee-devportal-kickstart-drupal/zipball/77e3704ef0b070ffeae71bae2fa4c8e7431b45ac",
+                "reference": "77e3704ef0b070ffeae71bae2fa4c8e7431b45ac",
                 "shasum": ""
             },
             "require": {
@@ -115,7 +115,7 @@
                 "drupal/fontawesome": "^2.12",
                 "drupal/paragraphs": "^1.6",
                 "drupal/pathauto": "^1.6",
-                "drupal/radix": "^4.6"
+                "drupal/radix": "^4.8"
             },
             "conflict": {
                 "drupal/pathauto": "<1.6"
@@ -133,7 +133,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "A fast demo and starting point for Apigee Developer Portals.",
-            "time": "2020-02-28T05:49:37+00:00"
+            "time": "2020-03-18T20:47:32+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -2461,21 +2461,20 @@
         },
         {
             "name": "drupal/apigee_edge",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/apigee_edge.git",
-                "reference": "8.x-1.6"
+                "reference": "8.x-1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/apigee_edge-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "15a6a3f43d5cb97f9dd7f10d798454429d6a0434"
+                "url": "https://ftp.drupal.org/files/projects/apigee_edge-8.x-1.7.zip",
+                "reference": "8.x-1.7",
+                "shasum": "745798863b1be267c02f3e7fa67700c7ba87c9ca"
             },
             "require": {
                 "apigee/apigee-client-php": "^2.0.4",
-                "cweagans/composer-patches": "^1.6.5",
                 "drupal/core": "~8.7",
                 "drupal/entity": "^1.0",
                 "drupal/key": "^1.8",
@@ -2484,9 +2483,16 @@
                 "php-http/guzzle6-adapter": "^1.1.1"
             },
             "require-dev": {
-                "behat/mink": "dev-master#9ea1cebe",
+                "apigee/apigee-mock-client-php": "^1.0",
+                "behat/mink-extension": "v2.2",
+                "bex/behat-screenshot": "^1.2",
+                "cweagans/composer-patches": "^1.6",
+                "drupal/console": "~1.0",
                 "drupal/core-dev": "^7.0",
+                "drupal/drupal-extension": "master-dev",
                 "drush/drush": "^9.0",
+                "phpmd/phpmd": "^2.8",
+                "phpmetrics/phpmetrics": "^2.5",
                 "phpunit/phpunit": "^6.5"
             },
             "type": "drupal-module",
@@ -2495,8 +2501,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1581368779",
+                    "version": "8.x-1.7",
+                    "datestamp": "1584665607",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
