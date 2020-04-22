@@ -16,7 +16,7 @@
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.6.5",
     "drupal-composer/drupal-scaffold": "^2.5",
-    "apigee/apigee_devportal_kickstart": "^1.11",
+    "apigee/apigee_devportal_kickstart": "^1.12",
     "drupal/apigee_m10n": "^1.4",
     "drupal/commerce": "^2.17",
     "php": "^7.3",
