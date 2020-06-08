@@ -104,6 +104,11 @@ class OrderRefresh implements OrderRefreshInterface {
       return FALSE;
     }
 
+    // Only unlocked orders should be automatically refreshed.
+    if ($order->isLocked()) {
+      return FALSE;
+    }
+
     // Accommodate long-running processes by always using the current time.
     $current_time = $this->time->getCurrentTime();
     $order_time = $order->getChangedTime();
@@ -154,6 +159,9 @@ class OrderRefresh implements OrderRefreshInterface {
     // Allow the processors to modify the order and its items.
     foreach ($this->processors as $processor) {
       $processor->process($order);
+      if (!$order->hasItems()) {
+        return;
+      }
     }
 
     foreach ($order->getItems() as $order_item) {

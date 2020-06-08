@@ -1,7 +1,5 @@
-node.apidoc.add_form:
-  route_name: node.add
+entity.apidoc.add_form:
+  route_name: entity.apidoc.add_form
   title: 'Add API Doc'
-  route_parameters:
-    node_type: 'apidoc'
   appears_on:
-    - view.api_catalog_admin.page_1
+    - entity.apidoc.collection
