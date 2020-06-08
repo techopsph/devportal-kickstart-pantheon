@@ -196,6 +196,25 @@ class CouponRedemptionPaneTest extends CommerceWebDriverTestBase {
     $this->assertSession()->pageTextNotContains('-$99.90');
     $this->assertSession()->pageTextContains('$999');
 
+    // Valid coupon.
+    $this->getSession()->getPage()->fillField('Coupon code', $coupon->getCode());
+    $this->getSession()->getPage()->pressButton('Apply coupon');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertSession()->pageTextContains($coupon->getCode());
+    $this->assertSession()->fieldNotExists('Coupon code');
+    $this->assertSession()->buttonNotExists('Apply coupon');
+    $this->assertSession()->pageTextContains('-$99.90');
+    $this->assertSession()->pageTextContains('$899.10');
+
+    // Coupon removal.
+    $this->getSession()->getPage()->pressButton('Remove coupon');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertSession()->pageTextNotContains($coupon->getCode());
+    $this->assertSession()->fieldExists('Coupon code');
+    $this->assertSession()->buttonExists('Apply coupon');
+    $this->assertSession()->pageTextNotContains('-$99.90');
+    $this->assertSession()->pageTextContains('$999');
+
     // Confirm that the order summary is refreshed when outside of the sidebar.
     $checkout_flow = CheckoutFlow::load('default');
     $configuration = $checkout_flow->get('configuration');
@@ -336,7 +355,7 @@ class CouponRedemptionPaneTest extends CommerceWebDriverTestBase {
     // Refresh the page and ensure the billing information hasn't been modified.
     $this->drupalGet(Url::fromRoute('commerce_checkout.form', ['commerce_order' => $this->cart->id(), 'step' => 'order_information']));
     $page = $this->getSession()->getPage();
-    $this->assertContains('Johnny Appleseed', $page->find('css', 'p.address')->getText());
+    $this->assertStringContainsString('Johnny Appleseed', $page->find('css', 'p.address')->getText());
   }
 
 }
