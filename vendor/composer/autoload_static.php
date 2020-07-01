@@ -497,7 +497,7 @@ class ComposerStaticInit20f3aa1b333b284d0f4681318f810b5a
         ),
         'Egulias\\EmailValidator\\' => 
         array (
-            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+            0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
         'Drush\\Internal\\' => 
         array (
