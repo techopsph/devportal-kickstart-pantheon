@@ -6,7 +6,7 @@ dependencies:
   - commerce:commerce_store
   - commerce:commerce_price
 
-# Information added by Drupal.org packaging script on 2020-06-03
-version: '8.x-2.19'
+# Information added by Drupal.org packaging script on 2020-06-26
+version: '8.x-2.20'
 project: 'commerce'
-datestamp: 1591210163
+datestamp: 1593196160
