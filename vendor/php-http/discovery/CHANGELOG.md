@@ -1,13 +1,23 @@
 # Change Log
 
-## Unreleased
+## 1.9.1 - 2020-07-13
+
+### Fixed
+
+- Support PHP 7.4 and 8.0
+
+## 1.9.0 - 2020-07-02
+
+### Added
+
+- Support discovering PSR-18 factories of `guzzlehttp/guzzle` 7+
 
 ## 1.8.0 - 2020-06-14
 
 ### Added
 
 - Support discovering PSR-17 factories of `guzzlehttp/psr7` package
-- Support discovering PSR-17 factories of `laminas/laminas-diactoros` pakcage
+- Support discovering PSR-17 factories of `laminas/laminas-diactoros` package
 - `ClassDiscovery::getStrategies()` to retrieve the list of current strategies.
 
 ### Fixed
