@@ -6,7 +6,7 @@ core_version_requirement: ^8
 dependencies:
   - apigee_edge_actions:apigee_edge_actions
 
-# Information added by Drupal.org packaging script on 2020-08-11
-version: '8.x-1.14'
+# Information added by Drupal.org packaging script on 2020-09-10
+version: '8.x-1.15'
 project: 'apigee_edge'
-datestamp: 1597170735
+datestamp: 1599774477
