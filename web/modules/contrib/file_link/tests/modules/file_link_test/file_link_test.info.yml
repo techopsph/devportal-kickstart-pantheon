@@ -1,0 +1,13 @@
+type: module
+name: 'File Link Test'
+description: 'Testing module for file_link module.'
+core: 8.x
+package: Testing
+dependencies:
+  - file_link
+  - entity_test
+
+# Information added by Drupal.org packaging script on 2020-11-04
+version: '2.0.3'
+project: 'file_link'
+datestamp: 1604487493

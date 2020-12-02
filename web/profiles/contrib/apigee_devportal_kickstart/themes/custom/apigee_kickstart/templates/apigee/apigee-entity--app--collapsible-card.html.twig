@@ -1,0 +1,87 @@
+{#
+/**
+ * @file
+ * Template for Apigee Edge App in Collapsible card display mode.
+ *
+ * Available variables:
+ * - entity: The Apigee Edge App entity.
+ * - content: All app items. Use {{ content }} to print them all,
+ * - attributes: HTML attributes for the containing element.
+ *
+ * @ingroup themeable
+ */
+#}
+{% extends 'apigee-entity--app.html.twig' %}
+{% block content %}
+    {% set tab_suffix = entity.name|clean_class %}
+
+    {% embed '@apigee-kickstart/card/collapsible-card.twig' with {
+        utility_classes: classes,
+        title: entity.label
+    } %}
+
+        {% block header %}
+          <div class="d-flex items-center">
+            {% if content.warnings %}
+              <span class="badge badge-warning d-inline-flex align-items-center mr-2">
+                <i class="fa fa-exclamation-circle d-inline-block mr-1"></i> {{ "Warnings"|t }}
+              </span>
+            {% endif %}
+            {{ content.status }}
+          </div>
+        {% endblock %}
+
+        {% block content %}
+
+          <ul class="nav nav-tabs--secondary mt-2 mb-4">
+            {% if content.callbackUrl or content.credentials.primary_wrapper %}
+              <li class="nav-item">
+                <a class="nav-link active" id="keys-tab-{{ tab_suffix }}" data-toggle="tab" href="#keys-{{ tab_suffix }}">
+                  {{ "Credentials"|t }}
+                </a>
+              </li>
+            {% endif %}
+
+            {% for tab in additional_tabs %}
+              <li class="nav-item">
+                <a href="{{ tab.url }}" class="nav-link">{{ tab.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+          {{ content.warnings }}
+
+          {% if content.credentials %}
+            <div class="tab-content">
+              <div class="tab-pane show active" id="credentials-{{ tab_suffix }}">
+                <div class="card apigee-entity--app__details">
+                  <h4 class="card-header bg-white">
+                    {{ "Details" }}
+                  </h4>
+                  <div class="card-body">
+                    {{ content|without('status', 'credentials', 'warnings', 'add_keys') }}
+                  </div>
+                </div>
+
+                <div class="card apigee-entity--app__credentials">
+                  <h4 class="card-header bg-white">
+                    {{ "Credentials"|t }}
+                    {{ content.add_keys }}
+                  </h4>
+                  <div class="card-body pb-0">
+                    {{ content.credentials.approved }}
+                  </div>
+                </div>
+
+                {% if content.credentials.revoked %}
+                  <div class="apigee-entity--app__credentials">
+                    {{ content.credentials.revoked }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+

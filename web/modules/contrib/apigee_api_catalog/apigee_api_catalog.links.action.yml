@@ -1,0 +1,7 @@
+node.apidoc.add_form:
+  route_name: node.add
+  title: 'Add API Doc'
+  route_parameters:
+    node_type: 'apidoc'
+  appears_on:
+    - view.api_catalog_admin.page_1

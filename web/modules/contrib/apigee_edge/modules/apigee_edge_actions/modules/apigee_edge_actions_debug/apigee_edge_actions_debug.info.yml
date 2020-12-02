@@ -1,0 +1,12 @@
+name: Apigee Edge Actions Debug
+description: Logs debug information for Apigee Edge Actions.
+package: Apigee (Experimental)
+type: module
+core_version_requirement: ^8
+dependencies:
+  - apigee_edge_actions:apigee_edge_actions
+
+# Information added by Drupal.org packaging script on 2020-11-18
+version: '8.x-1.19'
+project: 'apigee_edge'
+datestamp: 1605732054

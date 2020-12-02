@@ -1,0 +1,182 @@
+// App
+// -----------------------------------------------------------------------------
+.apigee-entity--app {
+
+  .tab-pane {
+
+    .field {
+
+      + .wrapper--primary {
+        padding-top: 1.2rem;
+        border-top: 1px solid $border-color;
+      }
+
+      &__label {
+        margin: 0;
+      }
+    }
+
+    .field,
+    .api-product-list-row,
+    .item-property {
+      width: 100%;
+      padding: .8rem 1.2rem;
+      font-size: 0.875rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      @include media-breakpoint-up(sm) {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      label,
+      .field__label,
+      .api-product-name {
+        display: inline-block;
+        min-width: 160px;
+        letter-spacing: 0.25px;
+        font-weight: 500;
+
+        @include media-breakpoint-up(md) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .card {
+    border-radius: 0;
+
+    + .card {
+      margin-top: 1rem;
+    }
+
+    .card-header {
+      font-size: 1rem;
+    }
+
+    .card-body {
+      padding: .5rem 0;
+    }
+  }
+
+  &__credentials {
+
+    + .apigee-entity--app__credentials {
+      margin-top: 1rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+
+      .btn {
+        margin-left: auto;
+      }
+    }
+
+    fieldset {
+      padding-bottom: .5rem;
+
+      + fieldset {
+        border-top: 1px solid $border-color;
+      }
+
+      legend {
+        display: none;
+      }
+
+      .fieldset-wrapper {
+
+        @include media-breakpoint-up(lg) {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        > div {
+
+          @include media-breakpoint-up(lg) {
+            width: 45%;
+          }
+
+          &.wrapper--secondary {
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            margin-top: 2rem;
+
+            label {
+              padding: .8rem 0;
+              margin: 0;
+              color: $gray-500;
+              font-size: .875rem;
+            }
+
+            .api-product-list-row {
+              border-top: 1px solid $border-color;
+              padding-left: 0;
+              padding-right: 0;
+
+              @include media-breakpoint-up(md) {
+                display: flex;
+              }
+
+              .api-product-name {
+                flex: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .app-credential {
+      position: relative;
+
+      .dropbutton-wrapper {
+        width: auto;
+        top: .5rem;
+
+        &.dropbutton-single {
+
+          a {
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Full view mode.
+// -----------------------------------------------------------------------------
+.apigee-entity--app--view-mode-full {
+  margin-bottom: 5rem;
+
+  .nav-tabs--secondary {
+    margin-top: 2rem;
+  }
+}
+
+// Collapsible card
+// -----------------------------------------------------------------------------
+.apigee-entity--app--view-mode-collapsible-card {
+
+  .collapsible-card__header {
+
+    .badge {
+      min-width: 80px;
+    }
+  }
+
+  .nav-tabs--secondary {
+    margin-top: -1rem;
+    flex-wrap: nowrap;
+    overflow: scroll;
+
+    @include media-breakpoint-up(md) {
+       overflow: hidden;
+    }
+  }
+}

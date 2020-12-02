@@ -1,0 +1,11 @@
+apidoc.admin:
+  title: API catalog
+  route_name: view.api_catalog_admin.page_1
+  base_route: system.admin_content
+  weight: 10
+
+entity.node.apidoc.reimport_spec_form:
+  route_name: entity.node.reimport_spec_form
+  base_route: entity.node.canonical
+  title: 'Re-import OpenAPI spec'
+  weight: 30

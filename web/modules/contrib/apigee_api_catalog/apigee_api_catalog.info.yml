@@ -1,0 +1,19 @@
+name: 'Apigee API Catalog'
+type: module
+description: 'Display OpenAPI documentation of your APIs to your developers.'
+core_version_requirement: ^8.8.0 || ^9
+package: 'Apigee'
+configure: entity.apidoc.settings
+dependencies:
+- drupal:text
+- drupal:file
+- drupal:user
+- drupal:node
+- drupal:path
+- drupal:options
+- drupal:file_link
+
+# Information added by Drupal.org packaging script on 2020-10-30
+version: '8.x-2.5'
+project: 'apigee_api_catalog'
+datestamp: 1604088798

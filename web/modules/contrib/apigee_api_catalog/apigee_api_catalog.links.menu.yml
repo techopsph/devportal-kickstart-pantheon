@@ -1,0 +1,6 @@
+apigee_api_catalog.apidoc.collection:
+  title: 'API catalog'
+  route_name: view.api_catalog_admin.page_1
+  description: 'List of all API documentation.'
+  parent: system.admin_content
+  weight: 200

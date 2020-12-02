@@ -1,0 +1,38 @@
+# Schema for the configuration files of the File Link module.
+
+field.storage_settings.file_link:
+  type: field.storage_settings.link
+  label: 'File Link settings'
+
+field.field_settings.file_link:
+  type: field.field_settings.link
+  label: 'File Link settings'
+  mapping:
+    file_extensions:
+      type: string
+      label: 'Allowed file extensions'
+    no_extension:
+      type: boolean
+      label: 'Allow URLs with no extension'
+    deferred_request:
+      type: boolean
+      label: 'Defer requests to cron and skip immediate validation'
+
+field.value.file_link:
+  type: field.value.link
+  label: 'Default value'
+
+field.formatter.settings.file_link:
+  type: field.formatter.settings.link
+  label: 'File Link format settings'
+  mapping:
+    format_size:
+      type: boolean
+      label: 'Format size value'
+
+field.formatter.settings.file_link_separate:
+  type: field.formatter.settings.file_link
+  label: 'Separate file link format settings'
+
+field.widget.settings.file_link_default:
+  type: field.widget.settings.link_default

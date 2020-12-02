@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation to status_property_element.
+ *
+ * Available variables:
+ * - element: Element that will be rendered.
+ * - element['value'] : the status string.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set statuses = {
+  approved: 'success',
+  active: 'success',
+  revoked: 'danger',
+  expired: 'warning',
+  pending: 'warning',
+} %}
+
+{% include '@radix/badge/badge.twig' with {
+  type: statuses[element.value|trim|lower]|default('info'),
+  content: element.value|capitalize,
+} %}
