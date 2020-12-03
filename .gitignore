@@ -49,6 +49,7 @@ Thumbs.db
 .sass-cache
 
 # PHP Storm #
+#############
 .idea
 
 # Lando #

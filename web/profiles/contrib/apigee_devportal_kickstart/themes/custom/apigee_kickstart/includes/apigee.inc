@@ -72,14 +72,17 @@ function apigee_kickstart_preprocess_apigee_entity__app(array &$variables) {
     }
   }
 
-
   if (!empty($variables['content']['add_keys'])) {
     /** @var \Drupal\Core\Url $url */
     $url = $variables['content']['add_keys']['#url'];
     $attributes = $url->getOption('attributes');
 
     // Add button classes to add_keys link.
-    $attributes['class'] = array_merge($attributes['class'], ['btn', 'btn-primary', 'btn-sm']);
+    $attributes['class'] = array_merge($attributes['class'], [
+      'btn',
+      'btn-primary',
+      'btn-sm',
+    ]);
 
     // Increase the height for the dialog.
     $attributes['data-dialog-options'] = json_encode([
@@ -99,8 +102,12 @@ function apigee_kickstart_preprocess_apigee_entity__app(array &$variables) {
 function apigee_kickstart_preprocess_app_credential(&$variables) {
   // Render the consumerKey and the consumerSecret as secret fields.
   foreach (['consumerKey', 'consumerSecret'] as $field_name) {
+    if (empty($variables['primary_wrapper'][$field_name]['value']['#value'])) {
+      continue;
+    }
+
     $variables['primary_wrapper'][$field_name]['value'] = [
-      '#type' => 'secret',
+      '#type' => 'apigee_secret',
       '#value' => $variables['primary_wrapper'][$field_name]['value']['#value'],
     ];
   }

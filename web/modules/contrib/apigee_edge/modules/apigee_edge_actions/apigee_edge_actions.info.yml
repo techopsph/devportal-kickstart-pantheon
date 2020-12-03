@@ -8,7 +8,7 @@ dependencies:
   - apigee_edge:apigee_edge
   - rules:rules
 
-# Information added by Drupal.org packaging script on 2020-09-10
-version: '8.x-1.15'
+# Information added by Drupal.org packaging script on 2020-11-18
+version: '8.x-1.19'
 project: 'apigee_edge'
-datestamp: 1599774477
+datestamp: 1605732054

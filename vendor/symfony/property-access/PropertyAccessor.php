@@ -115,7 +115,7 @@ class PropertyAccessor implements PropertyAccessorInterface
 
                 return;
             } catch (\TypeError $e) {
-                self::throwInvalidArgumentException($e->getMessage(), $e->getTrace(), 0, $propertyPath);
+                self::throwInvalidArgumentException($e->getMessage(), $e->getTrace(), 0, $propertyPath, $e);
                 // It wasn't thrown in this class so rethrow it
                 throw $e;
             }
@@ -202,7 +202,7 @@ class PropertyAccessor implements PropertyAccessorInterface
         }
 
         if (preg_match('/^\S+::\S+\(\): Argument #\d+ \(\$\S+\) must be of type (\S+), (\S+) given/', $message, $matches)) {
-            list(, $expectedType, $actualType) = $matches;
+            [, $expectedType, $actualType] = $matches;
 
             throw new InvalidArgumentException(sprintf('Expected argument of type "%s", "%s" given at property path "%s".', $expectedType, 'NULL' === $actualType ? 'null' : $actualType, $propertyPath), 0, $previous);
         }
@@ -392,7 +392,7 @@ class PropertyAccessor implements PropertyAccessorInterface
                 try {
                     $result[self::VALUE] = $object->{$access[self::ACCESS_NAME]}();
                 } catch (\TypeError $e) {
-                    list($trace) = $e->getTrace();
+                    [$trace] = $e->getTrace();
 
                     // handle uninitialized properties in PHP >= 7
                     if (__FILE__ === $trace['file']
@@ -889,7 +889,7 @@ class PropertyAccessor implements PropertyAccessorInterface
     public static function createCache($namespace, $defaultLifetime, $version, LoggerInterface $logger = null)
     {
         if (null === $defaultLifetime) {
-            @trigger_error(sprintf('Passing null as "$defaultLifetime" 2nd argument of the "%s()" method is deprecated since Symfony 4.4, pass 0 instead.', __METHOD__), E_USER_DEPRECATED);
+            @trigger_error(sprintf('Passing null as "$defaultLifetime" 2nd argument of the "%s()" method is deprecated since Symfony 4.4, pass 0 instead.', __METHOD__), \E_USER_DEPRECATED);
         }
 
         if (!class_exists('Symfony\Component\Cache\Adapter\ApcuAdapter')) {
@@ -901,7 +901,7 @@ class PropertyAccessor implements PropertyAccessorInterface
         }
 
         $apcu = new ApcuAdapter($namespace, $defaultLifetime / 5, $version);
-        if ('cli' === \PHP_SAPI && !filter_var(ini_get('apc.enable_cli'), FILTER_VALIDATE_BOOLEAN)) {
+        if ('cli' === \PHP_SAPI && !filter_var(ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
             $apcu->setLogger(new NullLogger());
         } elseif (null !== $logger) {
             $apcu->setLogger($logger);

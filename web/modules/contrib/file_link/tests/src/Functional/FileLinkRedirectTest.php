@@ -9,7 +9,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Provides functional tests for 'file_link' field type.
+ * Tests the redirect functionality of the 'file_link' field type.
  *
  * @group file_link
  */

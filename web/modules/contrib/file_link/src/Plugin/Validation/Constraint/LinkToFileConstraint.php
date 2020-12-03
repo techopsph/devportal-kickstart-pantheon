@@ -5,6 +5,7 @@ namespace Drupal\file_link\Plugin\Validation\Constraint;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
 use Drupal\file_link\Plugin\Field\FieldType\FileLinkItem;
+use Drupal\file_link\Plugin\QueueWorker\FileLinkMetadataUpdate;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -72,7 +73,7 @@ class LinkToFileConstraint extends Constraint implements ConstraintValidatorInte
         $is_valid = FALSE;
       }
 
-      if ($is_valid) {
+      if ($is_valid && !$this->hasDeferredRequest($link)) {
         // Check for redirect response and get effective URL if any.
         $url = $this->getEffectiveUrl($url);
 
@@ -143,6 +144,19 @@ class LinkToFileConstraint extends Constraint implements ConstraintValidatorInte
    */
   protected function needsExtension(FileLinkItem $link) {
     return !$link->getFieldDefinition()->getSetting('no_extension');
+  }
+
+  /**
+   * Check whereas given link field needs an extension.
+   *
+   * @param \Drupal\file_link\Plugin\Field\FieldType\FileLinkItem $link
+   *   Link item.
+   *
+   * @return bool
+   *   Whereas link item needs an extension.
+   */
+  protected function hasDeferredRequest(FileLinkItem $link) {
+    return !FileLinkMetadataUpdate::isProcessing() && $link->getFieldDefinition()->getSetting('deferred_request');
   }
 
   /**
