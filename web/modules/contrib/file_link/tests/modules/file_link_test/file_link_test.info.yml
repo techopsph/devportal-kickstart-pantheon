@@ -7,7 +7,7 @@ dependencies:
   - file_link
   - entity_test
 
-# Information added by Drupal.org packaging script on 2020-06-06
-version: '2.0.0'
+# Information added by Drupal.org packaging script on 2020-11-04
+version: '2.0.3'
 project: 'file_link'
-datestamp: 1591460657
+datestamp: 1604487493
