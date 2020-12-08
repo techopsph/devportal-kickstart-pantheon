@@ -9,7 +9,6 @@
 namespace Laminas\Feed\Reader\Http;
 
 use Laminas\Feed\Reader\Exception;
-use function is_string;
 
 class Response implements HeaderAwareResponseInterface
 {
@@ -74,15 +73,13 @@ class Response implements HeaderAwareResponseInterface
     /**
      * Validate that we have a status code argument that will work for our context.
      *
-     * @param int $statusCode
+     * @param  int $statusCode
      * @throws Exception\InvalidArgumentException for arguments not castable
      *     to integer HTTP status codes.
-     *
-     * @return void
      */
     private function validateStatusCode($statusCode)
     {
-        if (! is_numeric($statusCode) || (is_string($statusCode) && trim($statusCode) !== $statusCode)) {
+        if (! is_numeric($statusCode)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a numeric status code; received %s',
                 __CLASS__,
@@ -110,11 +107,9 @@ class Response implements HeaderAwareResponseInterface
     /**
      * Validate that we have a body argument that will work for our context.
      *
-     * @param mixed $body
+     * @param  mixed $body
      * @throws Exception\InvalidArgumentException for arguments not castable
      *     to strings.
-     *
-     * @return void
      */
     private function validateBody($body)
     {
@@ -137,8 +132,6 @@ class Response implements HeaderAwareResponseInterface
      * Validate header values.
      *
      * @throws Exception\InvalidArgumentException
-     *
-     * @return void
      */
     private function validateHeaders(array $headers)
     {

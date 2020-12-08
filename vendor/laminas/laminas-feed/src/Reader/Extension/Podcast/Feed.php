@@ -317,8 +317,6 @@ class Feed extends Extension\AbstractFeed
 
     /**
      * Register iTunes namespace
-     *
-     * @return void
      */
     protected function registerNamespaces()
     {

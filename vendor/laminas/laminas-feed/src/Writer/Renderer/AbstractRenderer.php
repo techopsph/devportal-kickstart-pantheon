@@ -167,7 +167,6 @@ class AbstractRenderer
      * on their appropriateness for the current type, e.g. renderers.
      *
      * @param string $type
-     * @return void
      */
     public function setType($type)
     {
@@ -189,8 +188,6 @@ class AbstractRenderer
      * helps simplify the appending of namespace declarations, but also ensures
      * namespaces are added to the root element - not scattered across the entire
      * XML file - may assist namespace unsafe parsers and looks pretty ;).
-     *
-     * @return void
      */
     public function setRootElement(DOMElement $root)
     {

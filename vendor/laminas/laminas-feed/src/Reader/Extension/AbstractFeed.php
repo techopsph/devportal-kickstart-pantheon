@@ -133,7 +133,7 @@ abstract class AbstractFeed
     /**
      * Get the DOMXPath object
      *
-     * @return DOMXPath
+     * @return string
      */
     public function getXpath()
     {

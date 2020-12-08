@@ -55,8 +55,6 @@ class LaminasHttpClientDecorator implements HeaderAwareClientInterface
 
     /**
      * Inject header values into the client.
-     *
-     * @return void
      */
     private function injectHeaders(array $headerValues)
     {

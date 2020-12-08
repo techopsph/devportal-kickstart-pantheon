@@ -82,12 +82,6 @@
     "enable-patching": true
   },
   "scripts": {
-    "post-install-cmd": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-    ],
-    "post-update-cmd": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-    ],
     "quick-start": [
       "composer install",
       "php web/core/scripts/drupal quick-start apigee_devportal_kickstart"

@@ -445,9 +445,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get an author entry in RSS format
      *
-     * @return array<string,null|string>|null
-     *
-     * @psalm-return array{email?: null|string, name?: null|string, uri?: null|string}|null
+     * @return string
      */
     protected function getAuthorFromElement(DOMElement $element)
     {
@@ -497,8 +495,6 @@ class Feed extends Extension\AbstractFeed
 
     /**
      * Register the default namespaces for the current feed format
-     *
-     * @return void
      */
     protected function registerNamespaces()
     {
@@ -520,8 +516,6 @@ class Feed extends Extension\AbstractFeed
 
     /**
      * Detect the presence of any Atom namespaces in use
-     *
-     * @return null|string
      */
     protected function getAtomType()
     {
